@@ -419,21 +419,26 @@
       var stage = resizerNode.getStage();
 
       var box = stage.getContent().getBoundingClientRect();
+      // 画布相对网页的坐标点
       var zeroPoint = {
         x: box.left,
         y: box.top
       };
+      // 鼠标事件坐标点
       var pointerPos = {
         left: e.clientX !== undefined ? e.clientX : e.touches[0].clientX,
         top: e.clientX !== undefined ? e.clientY : e.touches[0].clientY
       };
+      // 鼠标相对画布坐标
       var newAbsPos = {
         x: pointerPos.left - zeroPoint.x,
         y: pointerPos.top - zeroPoint.y
       };
 
+     // 设置 anchor 的坐标
       resizerNode.setAbsolutePosition(newAbsPos);
 
+      // 保持比例
       var keepProportion = this.keepRatio() || e.shiftKey;
 
       // console.log(keepProportion);
@@ -581,6 +586,7 @@
         return;
       }
 
+      // 获取 top-left anchor 的绝对坐标
       var absPos = this.findOne('.top-left').getAbsolutePosition(
         this.getParent()
       );
@@ -619,6 +625,8 @@
         this.findOne('.bottom-right').y() - this.findOne('.top-left').y();
 
       // console.log(x, y, width, height);
+
+      console.log(x, y, this.offsetX(), this.offsetY())
 
       this._fitNodeInto(
         {
