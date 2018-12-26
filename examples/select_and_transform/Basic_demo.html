@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- USE DEVELOPMENT VERSION -->
+  <script src="../../dist/konva-dev.js"></script>
+  <meta charset="utf-8">
+  <title>Konva Select and Transform Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #F0F0F0;
+    }
+    #container {
+      width: 600px;
+      border: 1px solid green;
+      margin: 30px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script>
+    var width = 600;
+    var height = 400
+
+    var stage = new Konva.Stage({
+      container: 'container',
+      width: width,
+      height: height
+    });
+
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    var rect = new Konva.Rect({
+      x: 100,
+      y: 100,
+      width: 140,
+      height: 100,
+      fill: 'green',
+      name: 'rect',
+      // rotation: 30,
+      draggable: true
+    });
+    layer.add(rect);
+    layer.draw();
+
+    let tr = null
+    // create new transformer
+    tr = new Konva.Transformer({
+      keepRatio: false
+    });
+    layer.add(tr);
+    tr.attachTo(rect);
+    layer.draw();
+
+    tr.on('transformend', (e) => {
+      // console.log(rect.getRotation(), rect.getClientRect())
+      // rect._getTransform()
+    })
+    // rect._getTransform()
+  </script>
+
+</body>
+
+</html>
